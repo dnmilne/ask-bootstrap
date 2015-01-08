@@ -5,7 +5,7 @@ var app = angular.module('app', ["ngSanitize","angular-ask"])
     
     $scope.response = {}
 
-    var surveyFile = "surveys/chat-script.json" ;
+    var surveyFile = "surveys/chat-feedback.json" ;
 
   	$http.get(surveyFile)
     .then(
