@@ -164,7 +164,7 @@ angular.module('angular-ask', ['ngAnimate', 'angular-mood', 'ui.bootstrap', 'ask
 			"        &nbsp; \n" + 
 			"      </div> \n" + 
 
-			"     <p class='question indent' ng-class='(field.missing) ? 'text-danger' : ''' ng-bind-html='field.question | markdown'></p> \n" + 
+			"     <p class='question indent' ng-class='(field.missing) ? \"text-danger\" : \"\"' ng-bind-html='field.question | markdown'></p> \n" + 
 
 			"  	  <p ng-show='field.notes' class='notes text-muted indent' ng-bind-html='field.notes | markdown'></p> \n" + 
 

@@ -1,6 +1,6 @@
 {
   "name": "ask-bootstrap",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "angular": "latest",
     "angular-animate": "latest",
