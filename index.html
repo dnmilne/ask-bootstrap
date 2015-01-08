@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta charset="utf-8">
+
+<html lang="en" ng-app='app' xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>angular-bootstrap</title>
+
+  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="bower_components/angular-mood/angular-mood.css" rel="stylesheet">
+
+  <script type="text/javascript"  src="bower_components/angular/angular.js"></script>
+  <script type="text/javascript"  src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+  <script type="text/javascript"  src="bower_components/angular-animate/angular-animate.min.js"></script>
+  <script type="text/javascript"  src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+  <script type="text/javascript"  src="bower_components/angular-mood/angular-mood.js"></script>
+
+  <script type="text/javascript"  src="bower_components/d3/d3.min.js"></script>
+  <script type="text/javascript"  src="bower_components/tinycolor/tinycolor.js"></script>
+  <script type="text/javascript"  src="bower_components/lodash/dist/lodash.min.js"></script>
+  <script type="text/javascript"  src="bower_components/showdown/compressed/showdown.js"></script>
+
+  <script type="text/javascript"  src="bower_components/ask-logic/ask-logic.js"></script>
+  
+  <script type="text/javascript"  src="ask-bootstrap.js"></script>
+  <link href="ask-bootstrap.css" rel="stylesheet">
+
+
+  <script type="text/javascript"  src="app.js"></script>
+
+</head>
+
+<body ng-controller="Ctrl">
+
+  <div class='container'>
+    <div class='row'>
+      <div class='col-sm-12'>
+        <ask-survey survey='survey' response='response'></ask-survey>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "name": "ask-bootstrap",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "latest",
+    "angular-animate": "latest",
+    "angular-sanitize": "latest",
+    "bootstrap": "latest",
+    "angular-bootstrap": "latest",
+    "font-awesome": "latest",
+    "angular-mood": "latest",
+    "showdown": "latest",
+    "ask-logic": "latest"
+  },
+  "main": "ask-bootstrap.js",
+  "authors": [
+    "David Milne <david.milne@sydney.edu.au>"
+  ],
+  "description": "An angular module for responding to ASK surveys, with boostrap theming",
+  "keywords": [
+    "angular",
+    "ask",
+    "survey",
+    "bootstrap"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/dnmilne/ask-bootstrap",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
