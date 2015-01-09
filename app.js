@@ -1,11 +1,13 @@
 var app = angular.module('app', ["ngSanitize","angular-ask"])
 
+
   .controller('Ctrl', function($scope, $http) {
 
     
     $scope.response = {}
 
-    var surveyFile = "surveys/chat-feedback.json" ;
+    
+    var surveyFile = "surveys/mh-lit.json" ;
 
   	$http.get(surveyFile)
     .then(
@@ -18,10 +20,6 @@ var app = angular.module('app', ["ngSanitize","angular-ask"])
         console.log(error) ;
       }
     ) ;
-
-    
-
-
   }) ;
 
 

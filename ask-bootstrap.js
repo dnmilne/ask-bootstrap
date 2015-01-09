@@ -13,7 +13,7 @@ angular.module('angular-ask', ['ngAnimate', 'angular-mood', 'ui.bootstrap', 'ask
     }
 })
 
-.directive('askSurvey', ["SurveyStates", function (SurveyStates) {
+.directive('askSurvey', ["$log", "SurveyStates", function ($log, SurveyStates) {
 
 	return {
 		restrict: 'E',
@@ -55,8 +55,9 @@ angular.module('angular-ask', ['ngAnimate', 'angular-mood', 'ui.bootstrap', 'ask
 			"			</li> \n" +
 			"		</ul> \n" +
 
-			"		<ask-field ng-repeat='field in state.fields' field='field' answer='response.answers[field.id]' state='state' ng-if='field.visible'></ask-field> \n" +
-
+			"       <div ng-repeat='field in state.fields'> \n" + 
+			"		  <ask-field field='field' answer='response.answers[field.id]' state='state' ng-if='field.visible'></ask-field> \n" +
+			"       </div> \n" + 
 			"		<div class='text-center'> \n" +
 
 			"			<hr/> \n" +
@@ -92,16 +93,26 @@ angular.module('angular-ask', ['ngAnimate', 'angular-mood', 'ui.bootstrap', 'ask
 				if (!scope.survey)
 					return ;
 
+				$log.debug("handing survey changed") ;
+
 				scope.state = SurveyStates.init(scope.survey, scope.response) ;
 
 			}, true) ;
 
 
 			scope.continue = function() {
+
+				$log.debug("attempting to continue")
+				$log.debug(scope.state) ;
+
 				scope.state.handleContinue() ;
 			}
 
 			scope.back = function() {
+
+				$log.debug("attempting to go back")
+				$log.debug(scope.state) ;
+
 				scope.state.handleBack() ;
 			}
 
@@ -130,7 +141,7 @@ angular.module('angular-ask', ['ngAnimate', 'angular-mood', 'ui.bootstrap', 'ask
 
 
 
-.directive('askField', function() {
+.directive('askField', ["$log", function($log) {
 
 	return {
 		restrict: 'E',
@@ -144,7 +155,7 @@ angular.module('angular-ask', ['ngAnimate', 'angular-mood', 'ui.bootstrap', 'ask
 
 			"  <div ng-if='!field.isQuestion'> \n" + 
 
-			"    <div ng-if='field.type == 'sectionBreak''> \n" + 
+			"    <div ng-if='field.type == \"sectionBreak\"'> \n" + 
 			"      <hr/> \n" + 
 			"      <h3>{{field.title}}</h3> \n" + 
 			"    </div> \n" + 
@@ -181,12 +192,15 @@ angular.module('angular-ask', ['ngAnimate', 'angular-mood', 'ui.bootstrap', 'ask
 		,
 		link : function (scope, element, attrs) {
 			scope.$watch('answer', function() {
+				$log.debug("handling answer changed for field " + scope.field.id) ;
+				$log.debug(scope.answer) ;
+
 				scope.state.handleAnswerChanged(scope.field.id) ;
 			}, true) ;
 		}
 	}
 
-})
+}])
 
 
 .directive('askFreetext', function() {
