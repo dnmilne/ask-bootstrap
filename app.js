@@ -3,11 +3,22 @@ var app = angular.module('app', ["ngSanitize","angular-ask"])
 
   .controller('Ctrl', function($scope, $http) {
 
-    
-    $scope.response = {}
 
     
-    var surveyFile = "surveys/mh-lit.json" ;
+    $scope.response = {
+        answers: {
+          qStreak: {number:5},
+          qDaysTired: {number:3},
+          qSickStreak: {number:2},
+          qDaysBusy: {number:3},
+          qGender: {choice:'Female'},
+          qStepsYesterday: {number:9845},
+          qDifficulty: {choice:'Hard'}
+        }
+    }
+
+    
+    var surveyFile = "surveys/fitness-coach.json" ;
 
   	$http.get(surveyFile)
     .then(

@@ -56,7 +56,7 @@ angular.module('angular-ask', ['ngAnimate', 'angular-mood', 'ui.bootstrap', 'ask
 			"		</ul> \n" +
 
 			"       <div ng-repeat='field in state.fields'> \n" + 
-			"		  <ask-field field='field' answer='response.answers[field.id]' state='state' ng-if='field.visible'></ask-field> \n" +
+			"		  <ask-field field='field' answer='response.answers[field.id]' state='state' response='response' ng-if='field.visible'></ask-field> \n" +
 			"       </div> \n" + 
 			"		<div class='text-center'> \n" +
 
@@ -141,14 +141,15 @@ angular.module('angular-ask', ['ngAnimate', 'angular-mood', 'ui.bootstrap', 'ask
 
 
 
-.directive('askField', ["$log", function($log) {
+.directive('askField', ["$log", "PlaceholderResolver", function($log, PlaceholderResolver) {
 
 	return {
 		restrict: 'E',
 		scope: {
 			field:'=',
 			answer: '=',
-			state: '='
+			state: '=',
+			response: '=',
 		},
 		template: 
 			"<div class='field form-group'> \n" + 
@@ -160,9 +161,9 @@ angular.module('angular-ask', ['ngAnimate', 'angular-mood', 'ui.bootstrap', 'ask
 			"      <h3>{{field.title}}</h3> \n" + 
 			"    </div> \n" + 
 
-			"    <p ng-show='field.text' class='text' ng-bind-html='field.text | markdown'></p> \n" + 
+			"    <p ng-show='field.text' class='text' ng-bind-html='resolvePlaceholders(field.text) | markdown'></p> \n" + 
 
-			"    <p ng-show='field.notes' class='notes text-muted' ng-bind-html='field.notes | markdown'></p> \n" + 
+			"    <p ng-show='field.notes' class='notes text-muted' ng-bind-html='resolvePlaceholders(field.notes) | markdown'></p> \n" + 
 
 			"  </div> \n" + 
 
@@ -175,9 +176,9 @@ angular.module('angular-ask', ['ngAnimate', 'angular-mood', 'ui.bootstrap', 'ask
 			"        &nbsp; \n" + 
 			"      </div> \n" + 
 
-			"     <p class='question indent' ng-class='(field.missing) ? \"text-danger\" : \"\"' ng-bind-html='field.question | markdown'></p> \n" + 
+			"     <p class='question indent' ng-class='(field.missing) ? \"text-danger\" : \"\"' ng-bind-html='resolvePlaceholders(field.question) | markdown'></p> \n" + 
 
-			"  	  <p ng-show='field.notes' class='notes text-muted indent' ng-bind-html='field.notes | markdown'></p> \n" + 
+			"  	  <p ng-show='field.notes' class='notes text-muted indent' ng-bind-html='resolvePlaceholders(field.notes) | markdown'></p> \n" + 
 
 			"     <p ng-switch='field.type' class='indent'> \n" + 
 			"          <ask-instruction ng-switch-when='instruction'></ask-instruction> \n" + 
@@ -191,12 +192,24 @@ angular.module('angular-ask', ['ngAnimate', 'angular-mood', 'ui.bootstrap', 'ask
 			"</div>"
 		,
 		link : function (scope, element, attrs) {
+
 			scope.$watch('answer', function() {
-				$log.debug("handling answer changed for field " + scope.field.id) ;
-				$log.debug(scope.answer) ;
+
+				$log.debug("answer updated for field " + scope.field.id) ;
 
 				scope.state.handleAnswerChanged(scope.field.id) ;
+
 			}, true) ;
+
+			
+
+			scope.resolvePlaceholders = function(text) {
+
+				if (!text)
+					return text ;
+
+				return PlaceholderResolver.resolve(text, scope.state, scope.response) ;
+			}
 		}
 	}
 
