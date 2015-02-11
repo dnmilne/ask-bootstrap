@@ -1,4 +1,4 @@
-var app = angular.module('app', ["ngSanitize","angular-ask"])
+var app = angular.module('app', ["ngSanitize","ask-bootstrap"])
 
 
   .controller('Ctrl', function($scope, $http) {

@@ -1,4 +1,4 @@
-angular.module('angular-ask', ['ngAnimate', 'angular-mood', 'ui.bootstrap', 'ask-logic'])
+angular.module('ask-bootstrap', ['ngAnimate', 'angular-mood', 'ui.bootstrap', 'ask-logic'])
 
 .filter('markdown', function() {
 
