@@ -7,11 +7,11 @@ var app = angular.module('app', ["ngSanitize","ask-bootstrap"])
     
     $scope.response = {
         answers: {
-          qStreak: {number:5},
+          qStreak: {number:2},
           qDaysTired: {number:3},
-          qSickStreak: {number:2},
+          qSickStreak: {number:1},
           qDaysBusy: {number:3},
-          qGender: {choice:'Female'},
+          qGender: {choice:'Male'},
           qStepsYesterday: {number:9845},
           qDifficulty: {choice:'Hard'}
         }
