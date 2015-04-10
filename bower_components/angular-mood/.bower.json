@@ -1,0 +1,38 @@
+{
+  "name": "angular-mood",
+  "version": "0.0.3",
+  "dependencies": {
+    "angular": "latest",
+    "d3": "latest",
+    "tinycolor": "latest",
+    "lodash": "latest"
+  },
+  "main": "angular-mood.js",
+  "authors": [
+    "David Milne <david.milne@sydney.edu.au>"
+  ],
+  "description": "An angular module for helping users state their mood",
+  "keywords": [
+    "angular",
+    "mood",
+    "emotion"
+  ],
+  "license": "MIT",
+  "homepage": "http://demos.poscomp.org/angular-mood",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "0.0.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.3",
+    "commit": "e2c23916726d80d951111ccf29559308629e5874"
+  },
+  "_source": "git://github.com/dnmilne/angular-mood.git",
+  "_target": "*",
+  "_originalSource": "angular-mood"
+}
