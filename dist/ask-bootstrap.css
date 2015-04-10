@@ -67,3 +67,7 @@ ask-field.ng-enter.ng-enter-active {
 .indent {
 	margin-left: 30px;
 }
+
+.debug {
+	border: 1px solid red;
+}

@@ -1,6 +1,6 @@
 {
   "name": "ask-bootstrap",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "dependencies": {
     "angular": "latest",
     "angular-animate": "latest",
@@ -10,9 +10,9 @@
     "font-awesome": "latest",
     "angular-mood": "latest",
     "showdown": "latest",
-    "ask-logic": "latest"
+    "ask-logic": "0.1.0"
   },
-  "main": "ask-bootstrap.js",
+  "main": ["dist/ask-bootstrap.js", "dist/ask-bootstrap.css"],
   "authors": [
     "David Milne <david.milne@sydney.edu.au>"
   ],

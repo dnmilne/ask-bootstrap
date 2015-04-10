@@ -1,0 +1,53 @@
+<div>
+	<div ng-if='field.scaleType=="radio"'>
+
+		<div ng-if='field.descriptions.length == field.length' style='display:table'>
+		    <div ng-repeat='choice in choices' style='width:33% ; display:table-cell ; text-align:center'>
+		        <input type="radio" ng-model='$parent.answer.index' ng-value='choice.index' class='radio'/> 
+		        <br/>
+		        <span class='text-muted' style='padding: 0px 10px'>{{choice.description}}</span>
+		    </div>
+		</div>	
+
+		<div ng-if='field.descriptions.length != field.length && field.descriptions.length == 2'>
+			<span class="radio-inline text-muted" style='cursor: default ; margin-left: 0px ; padding-left: 0px ; padding-right: 20px'>
+			    {{field.descriptions[0]}} &nbsp;
+			</span>
+
+			<label class="radio-inline" style='padding: 0px 5px'  ng-repeat='choice in choices' >
+			    <input type="radio" ng-model='$parent.answer.index' ng-value='choice.index'/>
+			    &nbsp;
+			</label>
+
+			<span class="radio-inline text-muted" style='cursor: default ; margin-left: 0px ; padding-left: 0px'>
+			    {{field.descriptions[1]}}
+			</span>
+		</div>
+	</div>
+
+
+	<div ng-if='field.scaleType=="star"'>
+		<span ng-repeat='choice in choices' ng-click='setChoice(choice)' ng-mouseover='hoverChoice(choice)' ng-mouseout='hoverChoice()' style='cursor:pointer'>
+
+			<span ng-show='hoveredChoice'>
+				<i ng-show='hoveredChoice.index >= choice.index' class="fa fa-star"></i>
+				<i ng-hide='hoveredChoice.index >= choice.index' class="fa fa-star-o"></i>
+			</span>
+
+			<span ng-hide='hoveredChoice'>
+				<i ng-show='$parent.answer.index >= choice.index' class="fa fa-star"></i>
+				<i ng-hide='$parent.answer.index >= choice.index' class="fa fa-star-o"></i>
+			</span>
+		</span>
+
+		<span ng-show='hoveredChoice'>
+			&nbsp; {{hoveredChoice.description}}
+		</span>
+
+		<span ng-show='!hoveredChoice && selectedChoice'>
+			&nbsp; {{selectedChoice.description}}
+		</span>
+	</div>
+
+</div>
+	

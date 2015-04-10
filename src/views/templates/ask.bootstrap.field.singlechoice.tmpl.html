@@ -1,0 +1,13 @@
+<div> 
+	<div ng-repeat='choice in field.choices' class='radio'> 
+		<label> 
+			<input type='radio' ng-model='$parent.answer.choice' ng-value='choice.name'/> 
+
+			{{choice.name}}  
+			
+			<span ng-show='choice.description' class='small'> 
+				{{choice.description}} 
+			</span> 
+		</label> 
+	</div> 
+</div>
