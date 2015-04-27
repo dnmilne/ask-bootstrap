@@ -87,8 +87,6 @@ angular.module('ask.bootstrap.directives', ['ngAnimate', 'angular-mood', 'ui.boo
 
 			}, true) ;
 
-			
-
 			scope.resolvePlaceholders = function(text) {
 
 				if (!text)
@@ -108,6 +106,132 @@ angular.module('ask.bootstrap.directives', ['ngAnimate', 'angular-mood', 'ui.boo
 		restrict: 'E',
 		templateUrl: 'ask.bootstrap.field.freetext.tmpl.html',
 		link : function (scope, element, attrs) {
+
+		}
+	}
+})
+
+
+.directive('askMultitext', function() {
+
+	return {
+		restrict: 'E',
+		templateUrl: 'ask.bootstrap.field.multitext.tmpl.html',
+		link : function (scope, element, attrs) {
+
+			//we want answer to be a simple array of strings,
+			//but angular is buggy unless it listens to an array of objects,
+			//so we need this complicated setup
+
+			scope.tempEntries = undefined ;
+
+			scope.$watch(
+				'answer.entries',
+				handleEntriesChanged,
+				true
+			) ;
+
+			scope.$watch(
+				'tempEntries',
+				handleTempEntriesChanged,
+				true
+			) ;
+		
+
+
+			function handleEntriesChanged() {
+
+				console.log("Handling entries changed") ;
+
+				if (!scope.answer.entries)
+					return ;
+
+				//check if we need to change 
+				if (!isCacheMismatched())
+					return ;
+
+				console.log("updating temp entries to match entries") ;
+
+				//update temp entries to match entries
+
+				var t = [] ;
+				_.each(scope.answer.entries, function(entry) {
+					t.push({text:entry}) ;
+				}) ;
+
+				//pad out number of entries to minimum 
+				var minEntries = 1 ;
+				if (scope.field.minEntries)
+					minEntries = scope.field.minEntries ;
+
+				while (t.length < minEntries) 
+					t.push({text:""}) ;
+				
+				scope.tempEntries = t ;
+			}
+
+
+
+			function handleTempEntriesChanged() {
+
+				console.log("handling temp entries changed") ;
+
+				if (!isCacheMismatched())
+					return ;
+
+				console.log("updating entries to match temp entries") ;
+
+				var t = [] ;
+				_.each(scope.tempEntries, function(entry) {
+					t.push(entry.text) ;
+				}) ;
+
+				
+
+
+				scope.answer.entries = t ;
+			}
+
+			function isCacheMismatched() {
+
+				console.log("checking cache")
+				console.log(scope.tempEntries) ;
+				console.log(scope.answer.entries) ;
+
+				if (!scope.tempEntries)
+					return true ;
+
+				if (!scope.answer.entries)
+					return true ;
+
+				if (scope.tempEntries.length != scope.answer.entries.length)
+					return true ;
+
+				for (var i=0 ; i<scope.tempEntries.length ; i++) {
+					if (scope.tempEntries[i].text != scope.answer.entries[i])
+						return true ;
+				}
+
+				return false ;
+			}
+
+			scope.canAdd = function() {
+
+				if (!scope.field.maxEntries)
+					return true ;
+
+				return scope.answer.entries.length < scope.field.maxEntries ;
+			} 
+
+			scope.add = function() {
+				scope.tempEntries.push({text:""}) ;
+			} 
+
+			scope.remove = function(index) {
+				console.log("removing " + index) ;
+
+				scope.tempEntries.splice(index, 1) ;
+			}
 
 		}
 	}
@@ -167,10 +291,10 @@ angular.module('ask.bootstrap.directives', ['ngAnimate', 'angular-mood', 'ui.boo
 	}
 })
 
-.directive('askScale', function() {
+.directive('askRating', function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'ask.bootstrap.field.scale.tmpl.html',
+		templateUrl: 'ask.bootstrap.field.rating.tmpl.html',
 		link : function (scope, element, attrs) {
 
 
@@ -181,33 +305,70 @@ angular.module('ask.bootstrap.directives', ['ngAnimate', 'angular-mood', 'ui.boo
 
 				scope.choices = [] ;
 				for (var i=0 ; i<scope.field.length ; i++) {
-					var choice = {index:i} ;
+					var choice = {rating:(i+1)} ;
 
 					if (scope.field.descriptions)
 						choice.description = scope.field.descriptions[i] ;
 
+					choice.isFilled = false ;
+
 					scope.choices.push(choice) ;
 				}
+
+				scope.cellWidth = Math.floor(100/scope.choices.length) + "%" ;
 
 			}, true ) ;
 
 			scope.setChoice = function(choice) {
 
 				if (choice)
-					scope.$parent.answer.index = choice.index ;
+					scope.$parent.answer.rating = choice.rating ;
 				else
-					scope.$parent.answer.index = undefined ;
+					scope.$parent.answer.rating = undefined ;
 
 				scope.selectedChoice = choice ;
 
+				updateStarFills() ;
 			} ;
 
 			scope.hoverChoice = function(choice) {
 
 				scope.hoveredChoice = choice ;
+
+				//updateStarFills() ;
 			} ;
 
+			function updateStarFills() {
 
+				console.log("updating star fills") ;
+
+				_.each(scope.choices, function(choice) {
+					choice.isFilled = isStarFilled(choice) ;
+				}) ;
+			}
+
+			function isStarFilled(choice) {
+
+				/*
+				Changing star style on hover is nice, but looks really messed up if browser is slightly slow (which happens in firefox)
+				if (scope.hoveredChoice) {
+					
+					if (scope.hoveredChoice.rating >= choice.rating) 
+						return true ;
+					else
+						return false ;
+				}
+				*/
+
+				if (!scope.$parent.answer) 
+					return false ;
+				
+				if (scope.$parent.answer.rating >= choice.rating)
+					return true ;
+				
+				return false ;
+				
+			} ;
 
 		}
 	}

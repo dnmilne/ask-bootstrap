@@ -5,6 +5,12 @@ angular.module('ask.bootstrap.controllers', ['angular-mood', 'ui.bootstrap'])
 .controller('MoodDialogCtrl', function($scope, $modalInstance, MoodData, mood) {
 
 	$scope.mood = _.clone(mood) ;
+
+	$scope.$watch('mood', function() {
+
+		console.log("Mood changed") ;
+		console.log(mood) ;
+	}) ;
 	
 	$scope.getStyle = function(mood) {
 

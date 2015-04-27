@@ -1,0 +1,20 @@
+<div>
+
+	<div ng-repeat='entry in tempEntries' style='padding-bottom: 5px'>
+        
+        <div style='display: table-cell ; width: 100%' ng-switch='field.length'>
+            <textarea ng-switch-when='LONG' ng-model='entry.text' class='form-control' rows='3'>
+			</textarea>
+
+			<input ng-switch-when='SHORT' ng-model='entry.text' type='text' class='form-control'/>
+        </div>
+        
+        <div style='display: table-cell ; vertical-align:middle ; padding-left: 10px'>
+            <a ng-click='remove($index)'><i class="fa fa-times-circle"></i></a>
+        </div>
+    </div>
+
+    <p ng-show='canAdd()'>
+    	<a ng-click='add()'><i class="fa fa-times-circle"></i> More</a>
+    </p>
+</div>

@@ -29,10 +29,11 @@
                     'ask-field',
                     'ask-instruction',
                     'ask-freetext',
+                    'ask-multitext',
                     'ask-numeric',
                     'ask-singlechoice',
                     'ask-multichoice',
-                    'ask-scale',
+                    'ask-rating',
                     'ask-mood',
                     'mood-matrix',
                     'mood-canvas'

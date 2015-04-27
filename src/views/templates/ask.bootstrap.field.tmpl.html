@@ -34,10 +34,11 @@
 		<p ng-switch='field.type' class='indent'> 
 			<ask-instruction ng-switch-when='instruction'></ask-instruction> 
 			<ask-freetext ng-switch-when='freetext'></ask-freetext> 
+			<ask-multitext ng-switch-when='multitext'></ask-multitext> 
 			<ask-numeric ng-switch-when='numeric'></ask-numeric> 
 			<ask-singlechoice ng-switch-when='singlechoice'></ask-singlechoice> 
 			<ask-multichoice ng-switch-when='multichoice'></ask-multichoice> 
-			<ask-scale ng-switch-when='scale'></ask-scale> 			
+			<ask-rating ng-switch-when='rating'></ask-rating> 			
 			<ask-mood ng-switch-when='mood'></ask-mood> 
 		</p> 
 	
