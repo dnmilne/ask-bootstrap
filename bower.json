@@ -9,8 +9,8 @@
     "angular-bootstrap": "latest",
     "font-awesome": "latest",
     "angular-mood": "latest",
-    "showdown": "latest",
-    "ask-logic": "0.1.0"
+    "markdown-it": "latest",
+    "ask-logic": "0.1.1"
   },
   "main": ["dist/ask-bootstrap.js", "dist/ask-bootstrap.css"],
   "authors": [

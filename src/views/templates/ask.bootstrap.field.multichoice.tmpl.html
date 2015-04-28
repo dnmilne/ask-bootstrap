@@ -10,4 +10,16 @@
 			</span> 
 		</label> 
 	</div> 
+
+	<div ng-repeat='autochoice in field.autochoices' class='checkbox'>
+		<label> 
+			<input type='checkbox' ng-checked='isChecked(autochoice)' ng-click='toggle(autochoice)' />
+
+			{{autochoice.name}}
+
+			<span ng-show='autochoice.description' class='text-muted small'> 
+				({{autochoice.description}}) 
+			</span> 
+		</label> 
+	</div>
 </div>

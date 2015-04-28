@@ -451,14 +451,14 @@ angular.module('ask.bootstrap.filters', [])
 
 .filter('markdown', function() {
 
-    var converter = new Showdown.converter();
+	var md = window.markdownit('commonmark');
 
     return function(markdown) {
 
         if (!markdown)
             return ;
 
-        return converter.makeHtml(markdown) ;
+        return md.render(markdown) ;
     }
 }) ;
 angular.module('ask.bootstrap.templates', ['ask.bootstrap.dlg.mood.tmpl.html', 'ask.bootstrap.field.freetext.tmpl.html', 'ask.bootstrap.field.mood.tmpl.html', 'ask.bootstrap.field.multichoice.tmpl.html', 'ask.bootstrap.field.multitext.tmpl.html', 'ask.bootstrap.field.numeric.tmpl.html', 'ask.bootstrap.field.rating.tmpl.html', 'ask.bootstrap.field.singlechoice.tmpl.html', 'ask.bootstrap.field.tmpl.html', 'ask.bootstrap.survey.tmpl.html']);
@@ -485,7 +485,7 @@ angular.module('ask.bootstrap.field.mood.tmpl.html', []).run(['$templateCache', 
 angular.module('ask.bootstrap.field.multichoice.tmpl.html', []).run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('ask.bootstrap.field.multichoice.tmpl.html',
-    '<div><div ng-repeat="choice in field.choices" class=checkbox><label><input type=checkbox ng-checked=isChecked(choice) ng-click="toggle(choice)"> {{choice.name}} <span ng-show=choice.description class="text-muted small">({{choice.description}})</span></label></div></div>');
+    '<div><div ng-repeat="choice in field.choices" class=checkbox><label><input type=checkbox ng-checked=isChecked(choice) ng-click="toggle(choice)"> {{choice.name}} <span ng-show=choice.description class="text-muted small">({{choice.description}})</span></label></div><div ng-repeat="autochoice in field.autochoices" class=checkbox><label><input type=checkbox ng-checked=isChecked(autochoice) ng-click="toggle(autochoice)"> {{autochoice.name}} <span ng-show=autochoice.description class="text-muted small">({{autochoice.description}})</span></label></div></div>');
 }]);
 
 angular.module('ask.bootstrap.field.multitext.tmpl.html', []).run(['$templateCache', function($templateCache) {
@@ -510,7 +510,7 @@ angular.module('ask.bootstrap.field.rating.tmpl.html', []).run(['$templateCache'
 angular.module('ask.bootstrap.field.singlechoice.tmpl.html', []).run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('ask.bootstrap.field.singlechoice.tmpl.html',
-    '<div><div ng-repeat="choice in field.choices" class=radio><label><input type=radio ng-model=$parent.answer.choice ng-value="choice.name"> {{choice.name}} <span ng-show=choice.description class=small>{{choice.description}}</span></label></div></div>');
+    '<div><div ng-repeat="choice in field.choices" class=radio><label><input type=radio ng-model=$parent.answer.choice ng-value="choice.name"> {{choice.name}} <span ng-show=choice.description class=small>{{choice.description}}</span></label></div><div ng-repeat="autochoice in field.autochoices" class=radio><label><input type=radio ng-model=$parent.answer.choice ng-value="autochoice.name"> {{autochoice.name}} <span ng-show=autochoice.description class=small>{{autochoice.description}}</span></label></div></div>');
 }]);
 
 angular.module('ask.bootstrap.field.tmpl.html', []).run(['$templateCache', function($templateCache) {

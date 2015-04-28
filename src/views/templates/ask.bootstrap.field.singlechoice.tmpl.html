@@ -10,4 +10,16 @@
 			</span> 
 		</label> 
 	</div> 
+	<div ng-repeat='autochoice in field.autochoices' class='radio'> 
+		<label> 
+			<input type='radio' ng-model='$parent.answer.choice' ng-value='autochoice.name'/> 
+
+			{{autochoice.name}}  
+			
+			<span ng-show='autochoice.description' class='small'> 
+				{{autochoice.description}} 
+			</span> 
+		</label> 
+	</div> 
+
 </div>

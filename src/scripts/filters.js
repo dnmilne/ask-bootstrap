@@ -3,13 +3,13 @@ angular.module('ask.bootstrap.filters', [])
 
 .filter('markdown', function() {
 
-    var converter = new Showdown.converter();
+	var md = window.markdownit('commonmark');
 
     return function(markdown) {
 
         if (!markdown)
             return ;
 
-        return converter.makeHtml(markdown) ;
+        return md.render(markdown) ;
     }
 }) ;
