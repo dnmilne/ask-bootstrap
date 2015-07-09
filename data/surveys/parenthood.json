@@ -1,0 +1,76 @@
+{
+  "title" : "Simple test survey",
+  "fields" : [ {
+    "type" : "freetext",
+    "id" : "qName",
+    "hidden" : false,
+    "question" : "What is your name?",
+    "optional" : false,
+    "length" : "SHORT"
+  }, {
+    "type" : "singlechoice",
+    "id" : "qHappy",
+    "hidden" : false,
+    "question" : "Are you happy?",
+    "optional" : false,
+    "choices" : [ {
+      "name" : "Yes"
+    }, {
+      "name" : "No"
+    } ],
+    "allowOther" : false
+  }, {
+    "type" : "instruction",
+    "id" : "iGood",
+    "hidden" : false,
+    "text" : "Good for you!"
+  }, {
+    "type" : "rating",
+    "id" : "qBadRating",
+    "hidden" : false,
+    "question" : "Oh no! How bad are things?",
+    "optional" : false,
+    "ratingType" : "radio",
+    "length" : 5,
+    "descriptions" : [ "Not that bad", "Pretty bad", "Horrible", "Terrible", "Catastrophic" ]
+  }, {
+    "type" : "freetext",
+    "id" : "qBadReason",
+    "hidden" : false,
+    "question" : "Oh man! That sounds really bad. How come?",
+    "optional" : false,
+    "length" : "LONG"
+  } ],
+  "fieldRules" : [ {
+    "trigger" : {
+      "questionId" : "qHappy",
+      "condition" : "is",
+      "choice" : "Yes"
+    },
+    "actions" : [ {
+      "action" : "show",
+      "fieldId" : "iGood"
+    } ]
+  }, {
+    "trigger" : {
+      "questionId" : "qHappy",
+      "condition" : "is",
+      "choice" : "No"
+    },
+    "actions" : [ {
+      "action" : "show",
+      "fieldId" : "qBadRating"
+    } ]
+  }, {
+    "trigger" : {
+      "questionId" : "qBadRating",
+      "condition" : "greaterThan",
+      "rating" : 2
+    },
+    "actions" : [ {
+      "action" : "show",
+      "fieldId" : "qBadReason"
+    } ]
+  } ],
+  "pageRules" : [ ]
+}

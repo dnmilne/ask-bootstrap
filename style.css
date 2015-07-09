@@ -1,0 +1,107 @@
+.ui-splitbar {
+	background-color: white;
+}
+
+
+
+.navbar-icon {
+
+	position: fixed ;
+
+	left: 10px;
+	top: -12px;
+
+	font-size: 37px;
+}
+
+.navbar-header {
+	padding-left: 80px ;
+}
+
+.navbar-brand {
+	font-weight: bold ;
+	color: white !important;
+	font-size: 25px ;
+}
+
+#content {
+	position: absolute;
+
+	top: 60px;
+	left: 10px;
+	right: 10px;
+	bottom: 10px;
+}
+
+.major-panel {
+	border: 1px solid #aaa;
+	background-color: white;
+}
+
+.major-panel .content {
+	position: absolute; 
+
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+
+}
+
+.padded {
+	padding: 5px;
+}
+
+.major-panel .menu{
+	position: absolute; 
+
+	right: 10px;
+	top:10px;
+
+	z-index: 100;
+
+	text-align: right;
+
+	background-color: rgba(255,255,255,0.5);
+
+
+	max-width: 300px ;
+}
+
+.major-panel .menu-button {
+
+	cursor: pointer;
+	color: #337ab7;
+}
+
+
+
+.has-detail .detail{
+	visibility: hidden;
+}
+
+.has-detail:hover .detail{
+	visibility: visible; ;
+}
+
+
+
+.cell-left, .cell-main, .cell-right {
+	display: table-cell;
+	vertical-align: top ;
+}
+
+.cell-left img, .cell-main img, .cell-right img {
+	margin-top: 5px;
+}
+
+.cell-left {
+	padding-right: 15px;
+}
+.cell-right {
+	padding-left: 15px;
+}
+
+.cell-main {
+	width: auto ;
+}

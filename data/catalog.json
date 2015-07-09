@@ -1,0 +1,60 @@
+{
+	"surveys": [
+		{
+			"title":"Visitor Feedback",
+			"id":"visitor-feedback",
+			"description": "A short form for letting visitors tell you what they think",
+			"features": ["moodField","fieldRule"]
+		},
+		{
+			"title":"Fitness coach",
+			"id":"fitness-coach",
+			"description": "An interactive dialog for getting people to commit to a workout",
+			"features": ["fieldRule","hiddenField"]
+		},
+		{
+			"title":"Parenthood",
+			"id":"parenthood",
+			"description": "A multipage survey about people and their dependents",
+			"features": ["pageBreak","pageRule"]
+		},
+		{
+			"title": "Times",
+			"id": "times",
+			"description": "A showcase for the time field",
+			"features": ["timeField"]
+		},
+		{
+			"title":"Pleasurable Activities",
+			"id":"pleasure",
+			"description": "The mycompass pleasurable activities intervention",
+			"features": ["pageBreak"]
+		}
+	],
+	"features": {
+		"moodField": {
+			"name":"mood fields",
+			"description":"Funky question field that encourages users to specify their mood in great detail"
+		},
+		"timeField": {
+			"name":"time fields",
+			"description":"A very flexible question field for specifying dates and times"
+		},
+		"hiddenField": {
+			"name":"hidden fields",
+			"description":"Hidden fields are meant to be filled automatically, and can hold state information about the visitor"
+		},
+		"pageBreak": {
+			"name":"page breaks",
+			"description":"Page breaks split long surveys into more manageable chunks"
+		},
+		"fieldRule": {
+			"name":"field rules",
+			"description":"Define complex rules to decide when to show or hide fields"
+		},
+		"pageRule": {
+			"name":"page rules",
+			"description":"Define complex rules to decide when to jump to or skip pages"
+		}
+	}
+}

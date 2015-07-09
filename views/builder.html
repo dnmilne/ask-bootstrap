@@ -1,0 +1,142 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+
+    <div class="navbar-icon">
+        <span class="fa fa-question-circle fa-inverse fa-2x"></span>
+    </div>
+
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#/">ask</a>
+    </div>
+  </div>
+</nav>
+
+<div id='content'>
+
+	<div ui-layout="{ flow : 'column' }">
+    
+    <div id='left-panel' ui-layout-container size="60%">
+      
+
+      <div ui-layout="{flow:'row'}" >
+          <div id='left-top-panel' ui-layout-container class='major-panel' size="80%">
+
+            <div class='menu'>
+
+              <p>
+                <strong ng-show='showSchemaHelp'>Survey Schema</strong>
+                &nbsp;
+                <i class="fa fa-question-circle fa-lg" ng-mouseover='showSchemaHelp=true' ng-mouseout='showSchemaHelp=false'></i>
+              </p>
+
+              <ul class='list-unstyled' ng-show='!showSchemaHelp'>
+                <li class='has-detail menu-button' ng-click='buildSurvey()' >
+                  <span class='detail small'>build survey</span>
+                  &nbsp;
+                  <i class="fa fa-play-circle fa-lg"></i>
+                </li>
+
+                <li class='has-detail menu-button' ng-click='revertSurvey()'>
+                    <span class='detail small'>revert changes</span>
+                    &nbsp;
+                    <i class="fa fa-undo fa-lg"></i>
+                </li>
+              </ul>
+
+              <p ng-show='showSchemaHelp' class='text-muted small'>
+                This is where you define your survey, using JSON.
+              </p>
+
+            </div>
+
+            <div ui-ace='ace_options' ng-model='schema_str' class='content'>
+            
+            </div>
+
+          </div>
+
+          <div id='left-bottom-panel' ui-layout-container class='major-panel'>
+            
+            <div class='menu'>
+ 
+              <p>
+                <strong ng-show='showResponseHelp'>Survey Response</strong>
+                &nbsp;
+                <i class="fa fa-question-circle fa-lg" ng-mouseover='showResponseHelp=true' ng-mouseout='showResponseHelp=false'></i>
+              </p>
+
+              <ul class='list-unstyled' ng-show='!showResponseHelp'>
+
+                <li class='has-detail menu-button' ng-click='clearResponse()'>
+                    <span class='detail small'>clear response</span>
+                    &nbsp;
+                    <i class="fa fa-undo fa-lg"></i>
+                </li>
+              </ul>
+
+              <div ng-show='showResponseHelp' class='text-muted small'>
+                <p>
+                  This is where the user's response to the survey is stored, in JSON.
+                </p>
+
+                <p>
+                  This is the data object you would want to save to a database, build reports from, etc. 
+                </p>
+
+              </div>
+            </div>
+
+            <div ui-ace='ace_options' readonly ng-model='response_str' class='content'>
+            
+            </div>
+
+          </div>
+      </div>
+
+    </div>
+
+
+    <div id='right-panel' ui-layout-container class='major-panel'>
+      
+      <div class='menu'>
+ 
+        <p>
+          <strong ng-show='showSurveyHelp'>Rendered Survey</strong>
+          &nbsp;
+          <i class="fa fa-question-circle fa-lg" ng-mouseover='showSurveyHelp=true' ng-mouseout='showSurveyHelp=false'></i>
+        </p>
+
+        <div ng-show='showSurveyHelp' class='text-muted small'>
+          <p>
+            This is how the survey appears for end-users.
+          </p>
+        </div>
+      </div>
+
+      <div class='content padded'>
+        <div ng-if='primer' >
+
+          <div class='alert alert-warning'>
+            <p>
+            This survey contains some hidden fields, which are meant to be set automatically. 
+            </p>
+
+            <p>
+              For this demo, please just fill them in manually below.
+            </p>
+          </div>
+
+          <ask-survey survey='primer.schema' response='primer.response'></ask-survey>
+        </div>
+
+
+        <div ng-if='!primer'>
+          <ask-survey survey='schema' response='response'></ask-survey>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>

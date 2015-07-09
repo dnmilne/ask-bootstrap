@@ -4,14 +4,16 @@
   "dependencies": {
     "angular": "latest",
     "angular-animate": "latest",
+    "angular-route": "latest",
     "angular-sanitize": "latest",
     "bootstrap": "latest",
     "angular-bootstrap": "latest",
     "font-awesome": "latest",
     "angular-mood": "latest",
-    "showdown": "latest",
+    "angular-ui-layout" : "latest",
     "ask-logic": "0.1.0",
-    "ask-bootstrap": "0.1.0"
+    "ask-bootstrap": "0.1.0",
+    "videogular": "latest"
   },
   "authors": [
     "David Milne <david.milne@sydney.edu.au>"

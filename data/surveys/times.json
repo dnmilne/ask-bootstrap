@@ -1,0 +1,27 @@
+{
+	"fields": [
+
+		{
+			"id": "qBirthdate",
+			"type": "datetime",
+			"question": "What is your birthday?",
+			"showTime": false,
+			"dateWithin": "150 years ago"
+		},
+		{
+			"id": "qLunch",
+			"type": "datetime",
+			"question": "When's lunch?",
+			"showDate": false
+		},
+		{ 
+			"id": "qAppointment",
+			"type": "datetime",
+			"question": "When do you want to do that thing?",
+			"dateWithin": "7 days"
+		}
+
+	],
+	"fieldRules": [],
+	"pageRules": []
+}

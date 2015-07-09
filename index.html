@@ -11,46 +11,67 @@
 
   <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="bower_components/datetime-bootstrap/dist/datetime-bootstrap.css" rel="stylesheet">
   <link href="bower_components/angular-mood/angular-mood.css" rel="stylesheet">
 
   <script type="text/javascript"  src="bower_components/angular/angular.min.js"></script>
+  <script type="text/javascript"  src="bower_components/angular-route/angular-route.min.js"></script>
   <script type="text/javascript"  src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
   <script type="text/javascript"  src="bower_components/angular-animate/angular-animate.min.js"></script>
   <script type="text/javascript"  src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 
+
+  <script type="text/javascript"  src="bower_components/raf/index.js"></script>
+  <script type="text/javascript"  src="bower_components/angular-ui-layout/ui-layout.min.js"></script>
+
+
+  <script type="text/javascript"  src="bower_components/angular-ui-ace/ui-ace.min.js"></script>
+  <script type="text/javascript"  src="bower_components/angular-ui-ace/ui-ace.min.js"></script>
+  <script type="text/javascript"  src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
+  <script type="text/javascript"  src="bower_components/ace-builds/src-min-noconflict/ext-language_tools.js"></script>
+  <script type="text/javascript"  src="bower_components/ace-builds/src-min-noconflict/ext-beautify.js"></script>
+  <script type="text/javascript"  src="bower_components/ace-builds/src-min-noconflict/snippets/json.js"></script>
+
+  
+
+
   <script type="text/javascript"  src="bower_components/angular-mood/angular-mood.js"></script>
+  <script type="text/javascript"  src="bower_components/datetime-bootstrap/dist/datetime-bootstrap.js"></script>
 
   <script type="text/javascript"  src="bower_components/d3/d3.min.js"></script>
   <script type="text/javascript"  src="bower_components/tinycolor/tinycolor.js"></script>
   <script type="text/javascript"  src="bower_components/lodash/lodash.min.js"></script>
-  <script type="text/javascript"  src="bower_components/showdown/compressed/showdown.js"></script>
+  <script type="text/javascript"  src="bower_components/markdown-it/dist/markdown-it.min.js"></script>
+
+  <script type="text/javascript"  src="bower_components/moment/min/moment.min.js"></script>
 
   <script type="text/javascript"  src="bower_components/ask-logic/ask-logic.js"></script>
   <script type="text/javascript"  src="bower_components/ask-bootstrap/dist/ask-bootstrap.js"></script>
 
+  <script type="text/javascript"  src="scripts/app.js"></script>
+
   <link href="bower_components/ask-bootstrap/dist/ask-bootstrap.css" rel="stylesheet">
-
-
-  
-
+  <link href="bower_components/angular-ui-layout/ui-layout.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
 </head>
 
-<body ng-controller="Ctrl">
+<body>
 
+  <div ng-view></div>
 
   
+  
 
+  <!--
+  <script>
 
+    window.onbeforeunload = confirmExit;
 
-  <div class='container'>
-    <div class='row'>
-      <div class='col-sm-12'>
-        <ask-survey survey='survey' response='response'></ask-survey>
-      </div>
-    </div>
-  </div>
+    function confirmExit() {
+        return "You have unsaved changes.";
+    }
 
-  <script type="text/javascript"  src="app.js"></script>
-
-</body>
+  </script>
+  -->
+  </body>
 </html>

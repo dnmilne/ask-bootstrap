@@ -1,0 +1,49 @@
+
+<div class='container'>
+
+	  <div class='col-sm-2'>
+	  </div>
+
+      <div class='col-sm-8'>
+
+        <h1>ask-bootstrap</h1>
+
+        <p class='lead'>
+          Build surveys in JSON, render them in HTML
+        </p>
+
+        <p>
+          <strong>ask-bootstrap</strong> is an AngularJS module for rendering ask surveys in HTML, with 
+          <a target='_blank' href='http://getbootstrap.com'>bootstrap</a> theming. Check out the <a href='https://github.com/dnmilne/ask-bootstrap'>GitHub repository</a> for source code and installation instructions.
+        </p>
+
+        <p>
+          This demo page lets you build surveys and see how they look. 
+          You can <a href='#/build/'>build a new survey from scratch</a>, or use one of the following examples:
+        </p>
+
+        <div class="list-group">
+          <a ng-repeat='survey in catalog.surveys' ng-href='#/build/{{survey.id}}' class='list-group-item' >
+            <p><strong>{{survey.title}}</strong></p>
+
+            <ul class='list-inline pull-right'>
+              <li class='text-muted small'>features</li>
+
+              <li ng-repeat='featureId in survey.features' >
+                <span class='badge' tooltip='{{catalog.features[featureId].description}}'>
+                  {{catalog.features[featureId].name}}
+                </span>
+              </li>
+            </ul>
+
+            <p>
+            {{survey.description}}
+            </p>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>

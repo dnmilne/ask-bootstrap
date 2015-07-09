@@ -1,0 +1,116 @@
+{
+  "title": "Visitor Feedback",
+  "completionMessage": "Thank you for your feedback.\n\nIf you ever need to chat again, then please jump on [our forums](http://examplelink.com) and we’ll be in touch.",
+  "tags": null,
+  "fields": [
+    {
+      "type": "freetext",
+      "id": "qName",
+      "length": "SHORT",
+      "question": "What is your name?"
+    },
+    {
+      "type": "singlechoice",
+      "id": "qGender",
+      "question": "What gender are you?",
+      "choices": [
+        {
+          "name": "Male"
+        },
+        {
+          "name": "Female"
+        },
+        {
+          "name": "More options"
+        }
+      ]
+    },
+    {
+      "type": "singlechoice",
+      "id": "qGender2",
+      "question": "What best describes you?",
+      "choices": [
+        {
+          "name": "Transgender or Transexual (FtM)",
+          "description": null
+        },
+        {
+          "name": "Transgender or Transexual (MtF)",
+          "description": null
+        },
+        {
+          "name": "Genderqueer",
+          "description": null
+        },
+        {
+          "name": "Androgynous",
+          "description": null
+        },
+        {
+          "name": "None of these options describe me",
+          "description": null
+        }
+      ]
+    },
+    {
+      "type": "mood",
+      "id": "qMoodBefore",
+      "question": "How did you feel **before** you started chatting with us today?"
+    },
+    {
+      "type": "mood",
+      "id": "qMoodNow",
+      "question": "How do you feel **now**?"
+    },
+    {
+      "type": "rating",
+      "ratingType": "star",
+      "id": "qRating",
+      "question": "How would you rate the help you received?",
+      "length": 5,
+      "descriptions": [
+        "Useless",
+        "Not great",
+        "Ok",
+        "Good",
+        "Excellent"
+      ]
+    },
+    {
+      "type": "freetext",
+      "id": "qSuggestions",
+      "question": "We are very sorry about that. Do you have any suggestions about what we could have done better?",
+      "optional": true,
+      "length": "LONG"
+    }
+  ],
+  "fieldRules": [
+    {
+      "trigger": {
+        "questionId": "qGender",
+        "condition": "is",
+        "choice": "More options"
+      },
+      "actions": [
+        {
+          "action": "show",
+          "fieldId": "qGender2"
+        }
+      ]
+    },
+    {
+      "trigger": {
+        "questionId": "qRating",
+        "condition": "lessThan",
+        "rating": "3"
+      },
+      "actions": [
+        {
+          "action": "show",
+          "fieldId": "qSuggestions"
+        }
+      ]
+    }
+  ],
+  "pageRules": []
+}
