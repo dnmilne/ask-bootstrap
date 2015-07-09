@@ -1,6 +1,6 @@
 <div class='field form-group'> 
 
-	<div ng-if='!field.isQuestion'> 
+	<div ng-if='!field.isQuestion' class='{{getToneClasses()}}'> 
 
 		<div ng-if='field.type == "sectionBreak"'> 
 
@@ -36,6 +36,7 @@
 			<ask-freetext ng-switch-when='freetext'></ask-freetext> 
 			<ask-multitext ng-switch-when='multitext'></ask-multitext> 
 			<ask-numeric ng-switch-when='numeric'></ask-numeric> 
+			<ask-datetime ng-switch-when='datetime'></ask-datetime> 
 			<ask-singlechoice ng-switch-when='singlechoice'></ask-singlechoice> 
 			<ask-multichoice ng-switch-when='multichoice'></ask-multichoice> 
 			<ask-rating ng-switch-when='rating'></ask-rating> 			

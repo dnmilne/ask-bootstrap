@@ -1,4 +1,4 @@
-angular.module('ask.bootstrap.directives', ['ngAnimate', 'angular-mood', 'ui.bootstrap', 'ask-logic'])
+angular.module('ask.bootstrap.directives', ['ngAnimate', 'angular-mood', 'ui.bootstrap', 'datetime.bootstrap', 'ask-logic'])
 
 
 
@@ -93,6 +93,14 @@ angular.module('ask.bootstrap.directives', ['ngAnimate', 'angular-mood', 'ui.boo
 					return text ;
 
 				return PlaceholderResolver.resolve(text, scope.state, scope.response) ;
+			}
+
+			scope.getToneClasses = function() {
+
+				if (!scope.field.tone)
+					return "" ;
+
+				return "alert alert-" + scope.field.tone ;
 			}
 		}
 	}
@@ -291,11 +299,13 @@ angular.module('ask.bootstrap.directives', ['ngAnimate', 'angular-mood', 'ui.boo
 	}
 })
 
-.directive('askRating', function() {
+.directive('askRating', ['$timeout', function($timeout) {
 	return {
 		restrict: 'E',
 		templateUrl: 'ask.bootstrap.field.rating.tmpl.html',
 		link : function (scope, element, attrs) {
+
+
 
 
 			scope.$watch('field', function() {
@@ -335,22 +345,29 @@ angular.module('ask.bootstrap.directives', ['ngAnimate', 'angular-mood', 'ui.boo
 
 				scope.hoveredChoice = choice ;
 
-				//updateStarFills() ;
+				updateStarFills() ;
 			} ;
 
 			function updateStarFills() {
 
 				console.log("updating star fills") ;
 
-				_.each(scope.choices, function(choice) {
-					choice.isFilled = isStarFilled(choice) ;
-				}) ;
+				if (scope.promise)
+					$timeout.cancel(scope.promise) ;
+
+				scope.promise = $timeout(
+					function() {
+						for (var i=0 ; i<scope.choices.length ; i++)
+							scope.choices[i].isFilled = isStarFilled(scope.choices[i]) ;
+					}, 50
+				) ;
+
 			}
 
 			function isStarFilled(choice) {
 
-				/*
-				Changing star style on hover is nice, but looks really messed up if browser is slightly slow (which happens in firefox)
+
+				//Changing star style on hover is nice, but looks really messed up if browser is slightly slow (which happens in firefox)
 				if (scope.hoveredChoice) {
 					
 					if (scope.hoveredChoice.rating >= choice.rating) 
@@ -358,7 +375,6 @@ angular.module('ask.bootstrap.directives', ['ngAnimate', 'angular-mood', 'ui.boo
 					else
 						return false ;
 				}
-				*/
 
 				if (!scope.$parent.answer) 
 					return false ;
@@ -368,12 +384,242 @@ angular.module('ask.bootstrap.directives', ['ngAnimate', 'angular-mood', 'ui.boo
 				
 				return false ;
 				
-			} ;
+			}
 
 		}
 	}
-})
+}])
 
+.directive('askDatetime', ["$log", function($log) {
+
+	var defaultConfig = {
+		showDate: true,
+		showTime: true
+	}
+
+	return {
+		restrict: 'E',
+		templateUrl: 'ask.bootstrap.field.datetime.tmpl.html',
+		link: function (scope, element, attrs) {
+
+		
+			scope.values = {date: [], time:[]} ;
+
+			scope.cfg = _.clone(defaultConfig) ;
+
+			scope.$watch('field', function() {
+
+				//merge config and default
+				if (!scope.field) {
+					scope.cfg = _.clone(defaultConfig) ;
+				} else {
+
+					scope.cfg = {
+						showDate: scope.field.showDate,
+						showTime: scope.field.showTime
+					} ;
+
+	          		_.each(defaultConfig, function(value, key) {
+			            if (scope.cfg[key] === null || scope.cfg[key] === undefined)
+			            	scope.cfg[key] = value ;
+			        }) ;
+				}
+
+				scope.cfg.date = {within:scope.field.dateWithin} ;
+				scope.cfg.time = {} ;
+			}) ;
+
+			
+			scope.$watch('values.date', function() {
+
+				if (!hasConflict())
+					return ;
+
+				handleDateOrTimeUpdated() ;
+			}, true);
+
+			scope.$watch('values.time', function() {
+
+				if (!hasConflict())
+					return ;
+
+				handleDateOrTimeUpdated() ;
+			}, true) ;
+
+			scope.$watch('answer', function() {
+
+				if (!hasConflict())
+					return ;
+
+				handleAnswerChanged() ;
+			})
+
+			function hasConflict() {
+
+				console.log("checking conflict") ;
+
+
+				var date = parseDateArray(scope.values.date) ;
+				var dateWidgetSet = isDateValid(date) ;
+				var dateAnswerSet = isDateValid(scope.answer) ;
+
+
+				var time = parseTimeArray(scope.values.time) ;
+				var timeWidgetSet = isTimeValid(time) ;
+				var timeAnswerSet = isTimeValid(scope.answer) ;
+
+
+				//if required date widget is not set, answer must be blank
+				if (scope.cfg.showDate && !dateWidgetSet) {
+					if (dateAnswerSet || timeAnswerSet)
+						return true ;
+					else
+						return false ;
+				}
+
+				//if required time widget is not set, answer must be blank
+				if (scope.cfg.showTime && !timeWidgetSet) {
+					if (dateAnswerSet || timeAnswerSet)
+						return true ;
+					else
+						return false ;
+				} 
+
+				//if date widget is set, answer must match it
+				if (dateWidgetSet || dateAnswerSet) {
+					if (date.year != scope.answer.year)
+						return true ;
+
+					if (date.month != scope.answer.month)
+						return true ;
+
+					if (date.day != scope.answer.month)
+						return true ;
+				}
+
+				//if time widget is set, answer must match it
+				if (timeWidgetSet || timeAnswerSet) {
+					if (time.hour != scope.answer.hour)
+						return true ;
+
+					if (time.minute != scope.answer.minute)
+						return true ;
+				}
+
+				return false ;
+			}
+
+			function isDateValid(date) {
+				if (!date)
+					return false ;
+
+				return (date.year && date.month && date.day) ;
+			}
+
+
+			function isTimeValid(time) {
+				if (!time)
+					return false ;
+
+				return (time.hour && time.minute != null) ;
+			}
+
+
+			function parseDateArray(array) {
+
+				if (!array || !array[0] || !array[1] || !array[2])
+					return {} ;
+
+				return {
+					year: array[0],
+					month: array[0],
+					day: array[0]
+				} ;
+			}
+
+			function parseTimeArray(array) {
+
+				if (!array || !array[0] || array[1] == null)
+					return {} ;
+
+				return {
+					hour: array[0],
+					minute: array[1]
+				}
+			}
+
+
+
+			function handleDateOrTimeUpdated() {
+
+				console.log("handling date or time change") ;
+
+				var date = parseDateArray(scope.values.date) ;
+				var time = parseTimeArray(scope.values.time) ;
+
+
+				if (scope.cfg.showDate && !isDateValid(date)) {
+					scope.answer = {} ;
+					return ;
+				}
+
+				if (scope.cfg.showTime && !isTimeValid(time)) {
+					scope.answer = {} ;
+					return ;
+				}
+
+				if (scope.cfg.showDate) {
+					scope.answer.year = date.year ;
+					scope.answer.month = date.month ;
+					scope.answer.day = date.day ;
+				} else {
+					scope.answer.year = undefined ;
+					scope.answer.month = undefined ;
+					scope.answer.day = undefined ;
+				}
+
+				if (scope.cfg.showTime) {
+					scope.answer.hour = time.hour ;
+					scope.answer.minute = time.minute ;
+				} else {
+					scope.answer.hour = undefined ;
+					scope.answer.minute = undefined ;
+				}
+
+			}
+
+			function handleAnswerChanged() {
+
+				console.log("handling answer change") ;
+
+				if (scope.cfg.showDate) {
+					if (isDateValid(scope.answer))
+						scope.values.date = [] ;
+					else
+						scope.values.date = [scope.answer.year, scope.answer.month, scope.answer.day] ;
+				} else {
+					scope.values.date = [] ;
+				}
+
+				if (scope.cfg.showTime) {
+					if (isTimeValid(scope.answer))
+						scope.values.time = [] ;
+					else
+						scope.values.time = [scope.answer.hour, scope.answer.minute, 0] ;
+						
+				} else {
+					scope.values.time = [] ;
+				}
+			}
+
+
+
+		}
+	}
+
+
+
+}])
 
 
 .directive('askMood', ['MoodData', '$modal', function(MoodData, $modal) {

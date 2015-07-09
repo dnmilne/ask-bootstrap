@@ -13,6 +13,7 @@
                         'angular.module(\'ask.bootstrap\', [\'ask.bootstrap.controllers\',' +
                                                                   '\'ask.bootstrap.directives\',' +
                                                                   '\'ask.bootstrap.filters\',' +
+                                                                  '\'ask.bootstrap.services\',' +
                                                                   '\'ask.bootstrap.templates\']);\n'
                 },
                 src: ['./src/scripts/*.js'],
@@ -31,6 +32,7 @@
                     'ask-freetext',
                     'ask-multitext',
                     'ask-numeric',
+                    'ask-time',
                     'ask-singlechoice',
                     'ask-multichoice',
                     'ask-rating',
@@ -78,6 +80,14 @@
                 './dist/ask-bootstrap.min.css': ['./dist/ask-bootstrap.css']
                 }
             }
+        },
+        watch: {
+            files: [
+                './src/views/{,*/}*.html',
+                './src/scripts/*.js',
+                './src/styles/*.css'
+            ],
+            tasks: 'quick'
         }
     });
 

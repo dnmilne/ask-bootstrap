@@ -1,11 +1,10 @@
 <div class='modal-body'> 
 	<div> 
-		<mood-canvas selected='mood' hovered='hoveredInCanvas'></mood-canvas> 
+		<mood-canvas chosen='mood' hovered='hoveredInCanvas'></mood-canvas> 
 	</div> 
 	<div> 
-		<mood-matrix selected='mood' hovered-in-canvas='hoveredInCanvas' hovered-in-matrix='hoveredInMatrix'></mood-matrix> 
+		<mood-matrix chosen='mood' hovered-in-canvas='hoveredInCanvas' hovered-in-matrix='hoveredInMatrix'></mood-matrix> 
 	</div> 
-	mood: {{mood}}
 </div> 
 <div class='modal-footer'> 
 	<button class='btn btn-primary' ng-click='ok()'>Ok</button> 

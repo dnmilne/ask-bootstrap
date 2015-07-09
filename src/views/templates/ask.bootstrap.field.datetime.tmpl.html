@@ -1,0 +1,15 @@
+<div class='ask-datetime form-inline'> 
+
+	<div ng-if='cfg.showDate' class='form-group' style='margin-right: 5px'>
+		<date-input date='values.date' config='cfg.date'></date-input>
+	</div>
+
+	<div ng-if='cfg.showTime' class='form-group'>
+		<time-input time='values.time' config='cfg.time'></time-input>
+	</div>
+
+	<br/>
+	<code>d{{values.date}}</code> <code>t:{{values.time}}</code> <code>{{answer}}</code>
+	
+
+</div>

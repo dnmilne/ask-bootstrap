@@ -8,7 +8,7 @@
 
 ask-field {
 	display: block;
-	margin-top: 30px;
+	margin-bottom: 0.5em;
 
 	overflow: hidden ;
 }
@@ -30,6 +30,12 @@ ask-field.ng-enter.ng-enter-active {
   max-height: 150px;
   opacity: 1;
 }
+
+
+
+
+
+
 
 .page-header {
 
@@ -71,3 +77,36 @@ ask-field.ng-enter.ng-enter-active {
 .debug {
 	border: 1px solid red;
 }
+
+.ask-time input.year {
+	
+}
+
+
+
+.internal-form-control {
+	border: none ;
+	background-color: transparent;
+	margin: 0px 3px;
+}
+
+select.internal-form-control, input.internal-form-control {
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+input.internal-form-control.year {
+	width: 4em;
+}
+
+input.internal-form-control.year::-webkit-input-placeholder {
+	color: inherit;
+}
+
+input.internal-form-control.year-moz-placeholder {
+	color: inherit;
+}
+
+

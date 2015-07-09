@@ -27,19 +27,23 @@
 		</div>
 	</div>
 
+
 	<!-- row of stars-->
 	<div ng-if='field.ratingType=="star"'>
-		<span ng-repeat='choice in choices' ng-click='setChoice(choice)' ng-mouseover='hoverChoice(choice)' ng-mouseout='hoverChoice()' style='cursor:pointer'>
-			<i class='fa fa-star' ng-show='choice.isFilled'></i>
-			<i class='fa fa-star-o' ng-hide='choice.isFilled'></i>
+		<span ng-repeat='choice in choices' ng-click='setChoice(choice)' ng-mouseover='hoverChoice(choice)' ng-mouseout='hoverChoice()' style='cursor:pointer ; font-size:large ; padding-right: 5px'>
+			<i class='fa' ng-class='(choice.isFilled) ? "fa-star" : "fa-star-o"'></i>
 		</span>
 
-		<span ng-show='hoveredChoice'>
-			&nbsp; {{hoveredChoice.description}}
-		</span>
+		<span>
+			&nbsp;
 
-		<span ng-show='!hoveredChoice && selectedChoice'>
-			&nbsp; {{selectedChoice.description}}
+			<span ng-show='hoveredChoice'>
+				{{hoveredChoice.description}}
+			</span>
+
+			<span ng-show='!hoveredChoice && selectedChoice'>
+				 {{selectedChoice.description}}
+			</span>
 		</span>
 
 	</div>
